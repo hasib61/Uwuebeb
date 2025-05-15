@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>HR Colour Treading Hack</title>
+  <style>
+    * {margin: 0; padding: 0; box-sizing: border-box;}
+    html, body {
+      height: 100%;
+      font-family: 'Courier New', Courier, monospace;
+      background: #000;
+      color: #00ffcc;
+      overflow-x: hidden;
+    }
+    canvas#particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+    .container {
+      padding: 20px;
+      text-align: center;
+      z-index: 2;
+    }
+    h1 {
+      font-size: 36px;
+      color: #00ff99;
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px #00ff99;
+    }
+    .market {
+      font-size: 20px;
+      color: #00ffff;
+      margin-bottom: 20px;
+      text-shadow: 0 0 8px #00ffff;
+    }
+    .selector {
+      margin-bottom: 20px;
+    }
+    .selector label {
+      font-size: 25px;
+      margin: 7 20px;
+      cursor: pointer;
+    }
+    .results {
+      display: none;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    .result-box {
+      background: #111;
+      padding: 7px;
+      border-radius: 5px;
+      border: 2px solid #0ff;
+      box-shadow: 0 0 15px #0ff;
+      width: 200px;
+    }
+    .result-box h2 {
+      font-size: 22px;
+      margin-bottom: 15px;
+      color: #00ffff;
+    }
+    .signal {
+      font-size: 26px;
+      font-weight: bold;
+      text-shadow: 0 0 5px #ff00ff;
+    }
+    .site-buttons, .action-buttons {
+      margin-top: 20px;
+    }
+    .site-buttons a, .action-buttons button {
+      display: inline-block;
+      margin: 5px;
+      padding: 10px 20px;
+      background: #111;
+      border: 2px solid #00ffcc;
+      border-radius: 12px;
+      color: #00ffcc;
+      font-size: 18px;
+      text-decoration: none;
+      box-shadow: 0 0 10px #00ffcc;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .site-buttons a:hover, .action-buttons button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 20px #00ffcc;
+    }
+    .countdown {
+      font-size: 18px;
+      margin-top: 10px;
+      color: #ffcc00;
+    }
+    .info-box {
+      margin-top: 30px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid #0ff;
+      font-size: 14px;
+      width: 90%;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<div class="container">
+  <h1>🚀 HR Colour Treading Hack</h1>
+  <div class="market">🎯 Market: WIN GO 30 Second</div>
+
+  <div class="selector">
+    <label><input type="radio" name="site" value="dk" checked> DK WIN</label>
+    <label><input type="radio" name="site" value="hgzy"> HGZY</label>
+  </div>
+
+  <div class="action-buttons">
+    <button id="showResultBtn">🎲 রেজাল্ট দেখুন</button>
+    <div class="countdown" id="countdownTimer">⏳</div>
+  </div>
+
+  <div class="results" id="resultBox">
+    <div class="result-box">
+      <h6 id="selectedSite">সিগনাল</h5>
+      <div class="signal" id="signalResult">--</div>
+    </div>
+  </div>
+
+  <div class="site-buttons">
+    <a href="https://dkwin9.com/#/register?invitationCode=52524111810" target="_blank">🌐 Visit DK WIN</a>
+    <a href="https://hgzy.biz/#/register?invitationCode=24553483266" target="_blank">🌐 Visit HGZY</a>
+  </div>
+
+  <div class="info-box">
+    ⚠️ এই সাইটটি শুধুমাত্র DK WIN এবং HGZY গেইম এর জন্য তৈরি।  
+    🧪 আপনার যেই গেইমের সিগনাল লাগবে উপরে সিলেক্ট করুন তার পর সিগনাল নিন।
+    🔐 আপনার ঝুঁকির দায় আপনাকেই নিতে হবে। লস হলে কেউ দায়ি নয়।
+  </div>
+</div>
+
+<script>
+  // Particle animation
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  let particlesArray = [];
+
+  class Particle {
+    constructor(){
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.size = Math.random() * 2 + 1;
+      this.speedX = Math.random() * 1 - 0.5;
+      this.speedY = Math.random() * 1 - 0.5;
+    }
+    update(){
+      this.x += this.speedX;
+      this.y += this.speedY;
+      if(this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+      if(this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+    }
+    draw(){
+      ctx.fillStyle = '#00ffff';
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  function init(){
+    particlesArray = [];
+    for(let i = 0; i < 100; i++){
+      particlesArray.push(new Particle());
+    }
+  }
+
+  function animate(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for(let i = 0; i < particlesArray.length; i++){
+      particlesArray[i].update();
+      particlesArray[i].draw();
+    }
+    requestAnimationFrame(animate);
+  }
+
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    init();
+  });
+
+  init();
+  animate();
+
+  // Result logic
+  const showBtn = document.getElementById('showResultBtn');
+  const resultBox = document.getElementById('resultBox');
+  const countdown = document.getElementById('countdownTimer');
+  const signalResult = document.getElementById('signalResult');
+  const selectedSite = document.getElementById('selectedSite');
+
+  const options = ["BIG", "SMALL"];
+
+  function showResults() {
+    const selected = document.querySelector('input[name="site"]:checked').value;
+    const result = options[Math.floor(Math.random() * options.length)];
+    
+    resultBox.style.display = 'flex';
+    selectedSite.textContent = selected === 'dk' ? "DK WIN সিগনাল" : "HGZY সিগনাল";
+    signalResult.textContent = result;
+    signalResult.style.color = result === "BIG" ? "#00ff00" : "#ff0000";
+
+    showBtn.disabled = true;
+    let timeLeft = 30;
+    countdown.textContent = `⏳ ${timeLeft} সেকেন্ড অপেক্ষা করুন...`;
+
+    const timer = setInterval(() => {
+      timeLeft--;
+      countdown.textContent = `⏳ ${timeLeft} সেকেন্ড অপেক্ষা করুন...`;
+      if(timeLeft <= 0){
+        clearInterval(timer);
+        showBtn.disabled = false;
+        countdown.textContent = "✅ আবার রেজাল্ট দেখতে পারেন।";
+      }
+    }, 1000);
+  }
+
+  showBtn.addEventListener('click', showResults);
+</script>
+
+</body>
+</html>
